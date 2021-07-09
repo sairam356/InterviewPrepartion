@@ -1,0 +1,250 @@
+What are JavaScript Data Types?
+
+Following are the JavaScript Data types:
+
+Number
+String
+Boolean
+Object
+Undefined
+##############################################################################################
+ What is the use of isNaN function?
+
+isNan function returns true if the argument is not a number; otherwise, it is false.
+
+What is the use of Void (0)?
+
+Void(0) is used to prevent the page from refreshing, and parameter "zero" is passed while calling.
+
+Void(0) is used to call another method without refreshing the page.
+################################################################################################
+. Which keywords are used to handle exceptions?
+
+Try… Catch---finally is used to handle exceptions in the JavaScript
+
+Try{
+    Code
+}
+Catch(exp){
+    Code to throw an exception.
+}
+Finally{
+    Code runs either it finishes successfully or after catch
+}
+#################################################################################################
+ for-in loop in Javascript?
+
+The for-in loop is used to loop through the properties of an object.
+##################################################################################################
+DOM stands for Document Object Model and is responsible for how various objects in a document interact 
+with each other. 
+DOM is required for developing web pages, which includes objects like paragraphs, links, etc. 
+These objects can be operated to include actions like add or delete. DOM is also required to add extra 
+capabilities to a web page. On top of that, the use of API gives an advantage over other existing models.
+##################################################################################################
+JavaScript Array Methods
+The Array object has many properties and methods which help developers to handle arrays easily and efficiently. You can get the value of a property by specifying arrayname.property and the output of a method by specifying arrayname.method().
+
+length property --> If you want to know the number of elements in an array, you can use the length property.
+prototype property --> If you want to add new properties and methods, you can use the prototype property.
+reverse method --> You can reverse the order of items in an array using a reverse method.
+sort method --> You can sort the items in an array using sort method.
+pop method --> You can remove the last item of an array using a pop method.
+shift method --> You can remove the first item of an array using shift method.
+push method --> You can add a value as the last item of the array.
+#####################################################################################################
+"Producing code" is code that can take some time
+
+"Consuming code" is code that must wait for the result
+
+A Promise is a JavaScript object that links producing code and consuming code
+################################################################################################################
+
+"async and await make promises easier to write"
+
+async makes a function return a Promise
+
+await makes a function wait for a Promise
+#########################################################################################################
+Functions running in parallel with other functions are called asynchronous
+
+A good example is JavaScript setTimeout()
+#######################################################################################################
+A callback is a function passed as an argument to another function
+
+This technique allows a function to call another function
+
+A callback function can run after another function has finished
+################################################################################################################
+With the apply() method, you can write a method that can be used on different objects.
+
+The apply() method is similar to the call() method
+
+
+
+The Difference Between call() and apply()
+The difference is:
+
+The call() method takes arguments separately.
+
+The apply() method takes arguments as an array.
+
+Example:
+const person = {
+  fullName: function(city, country) {
+    return this.firstName + " " + this.lastName + "," + city + "," + country;
+  }
+}
+
+const person1 = {
+  firstName:"John",
+  lastName: "Doe"
+}
+
+person.fullName.call(person1, "Oslo", "Norway");
+#######################################################
+const person = {
+  fullName: function(city, country) {
+    return this.firstName + " " + this.lastName + "," + city + "," + country;
+  }
+}
+
+const person1 = {
+  firstName:"John",
+  lastName: "Doe"
+}
+
+person.fullName.apply(person1, ["Oslo", "Norway"]);
+
+################################################################################################################
+prototype Property
+The JavaScript prototype property allows you to add new properties to object constructors:
+
+function Person(first, last, age, eyecolor) {
+  this.firstName = first;
+  this.lastName = last;
+  this.age = age;
+  this.eyeColor = eyecolor;
+}
+
+Person.prototype.nationality = "English";
+
+The JavaScript prototype property also allows you to add new methods to objects constructors:
+
+
+
+function Person(first, last, age, eyecolor) {
+  this.firstName = first;
+  this.lastName = last;
+  this.age = age;
+  this.eyeColor = eyecolor;
+}
+
+Person.prototype.name = function() {
+  return this.firstName + " " + this.lastName;
+};
+#############################################################################################################
+Four ways to create obejct in javascript 
+In JavaScript, there are four methods to use to create an object:
+
+Object Literals.
+New operator or constructor.
+Object.create method.
+Class.
+
+
+ecMascript 6
+
+class Car {
+
+    constructor(maker, price) {
+        this.maker = maker;
+        this.price = price;
+    }
+
+    getInfo() {
+        console.log(this.maker + " costs : " + this.price);
+    }
+}
+
+var car1 = new Car("BMW", 100);
+car1.getInfo();
+var car2 = new Car("Audi", 150);
+car2.getInfo();
+#####################################
+You can also create new objects using the Object.create() method, 
+which allows you to specify the prototype object and the properties. For example:
+
+var Car = {
+    model: 'BMW',
+
+    color: 'red'
+}
+You can use the Car object as a prototype to create another object, as shown below:
+
+
+var ElectricCar = Object.create(Car);
+
+console.log(ElectricCar.model); // BMW
+
+
+var ElectricCar = Object.create(Car, {
+    type: {
+        value: 'Electric',
+        writable: true,
+        configurable: false,
+        enumerable: true
+    }
+});
+console.log(ElectricCar.type); // Electric
+######################################################
+New Operator or Constructor
+The second way to create an object is to use the constructor function. 
+If you call a function using a new operator, the function acts as a constructor and returns an object. 
+Consider the following code:
+
+
+function Car(model, color) {
+
+    this.model = model;
+
+    this.color = color;
+
+}
+
+var c1 = new Car('BMW', 'red');
+
+console.log(c1.model);
+######################################################
+bject Literals
+An object literal, also called an object initializer, is a comma-separated set of paired names and values.
+ You can create an object literal as shown below:
+
+
+var car = {
+
+    model: 'bmw',
+
+    color: 'red',
+
+    price: 2000
+
+}
+
+console.log(JSON.stringify(car));
+#################################################################################################################
+ Pure Components. They compare the initial and final values for the state and props variables. 
+If there is no difference between the two, they won’t trigger the re-rendering logic for the component.
+####################################################################################################################
+mapStateToProps is a function that you would use to provide the store data to your component,
+ whereas mapDispatchToProps is something that you will use to provide the action creators as props to your component
+
+function mapStateToProps(state) {
+  return { todos: state.todos }
+}
+
+function mapDispatchToProps(dispatch) {
+  return { addTodo: bindActionCreators(addTodo, dispatch) }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Todos);

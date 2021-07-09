@@ -1,0 +1,541 @@
+https://www.onlyfullstack.com/java-8-features-programming-interview-questions/  -- pratice programs
+
+#######################################################################################################################################
+
+Object-oriented programming (OOP) is nothing but that which allows the writing of programs with the help of certain classes and real-time objects.
+#######################################################################################################################################
+HashMap Works Internally?
+
+Data structure to store entry objects is an array named table of type Entry.
+A particular index location in array is referred as bucket, because it can hold the first element of a linkedlist of entry objects.
+Key object’s hashCode() is required to calculate the index location of Entry object.
+Key object’s equals() method is used to maintain uniqueness of keys in map.
+Value object’s hashCode() and equals() method are not used in HashMap’s get() and put() methods.
+Hash code for null keys is always zero, and such entry object is always stored in zero index in Entry[].
+########################################################################################################################################
+
+1) Checked Exception
+The classes which directly inherit Throwable class except RuntimeException and Error are known as checked exceptions e.g. IOException, SQLException etc. Checked exceptions are checked at compile-time.
+
+2) Unchecked Exception
+The classes which inherit RuntimeException are known as unchecked exceptions e.g. ArithmeticException, NullPointerException, ArrayIndexOutOfBoundsException etc. Unchecked exceptions are not checked at compile-time, but they are checked at runtime.
+ 
+Error is irrecoverable e.g. OutOfMemoryError, VirtualMachineError, AssertionError etc.
+
+
+#########################################################################################################################################
+String s=new String("Welcome");//creates two objects and one reference variable  
+one object in string constant pool and other in Object heap memory
+
+String s1="Welcome";  
+String s2="Welcome";//It doesn't create a new instance   
+
+this is string literal concept -->To make Java more memory efficient (because no new objects are 
+created if it exists already(jVM will check in the string constant pool).
+
+#########################################################################################################################################
+String class is immutable.
+String is slow and consumes more memory when you concat too many strings because every time it creates new instance.
+String class overrides the equals() method of Object class. So you can compare the contents of two strings by equals() method.
+
+StringBuffer class is mutable.
+StringBuffer is fast and consumes less memory when you cancat strings.
+StringBuffer class doesn't override the equals() method of Object class.
+StringBuffer is synchronized i.e. thread safe. It means two threads can't call the methods of StringBuffer simultaneously.
+
+
+StringBuilder is non-synchronized i.e. not thread safe. It means two threads can call the methods of StringBuilder simultaneously.
+
+##########################################################################################################################################
+We can use == operators for reference comparison (address comparison) and .equals() method for content comparison. 
+In simple words, == checks if both objects point to the same memory location whereas .equals() evaluates to the comparison of values in the objects.
+
+###########################################################################################################################################
+Program Order of execution:
+
+Static Block
+InstanceBlock
+Constructor
+Normal Method
+Static Method
+###########################################################################################################################################
+Thread Scheduler in Java
+Thread scheduler in java is the part of the JVM that decides which thread should run.
+
+There is no guarantee that which runnable thread will be chosen to run by the thread scheduler.
+
+Only one thread at a time can run in a single process.
+
+The thread scheduler mainly uses preemptive or time slicing scheduling to schedule the threads.
+############################################################################################################################################
+Differnce b/w Runnable and Callbale
+
+|              Runnable                  |                                           Callable<T>                                            |
++----------------------------------------+--------------------------------------------------------------------------------------------------+
+| Introduced in Java 1.0 of java.lang    | Introduced in Java 1.5 of java.util.concurrent library                                           |
+| Runnable cannot be parametrized        | Callable is a parametrized type whose type parameter indicates the return type of its run method |
+| Runnable has run() method              | Callable has call() method                                                                       |
+| Runnable.run() returns void            | Callable.call() returns a generic value V                                                        |
+| No way to propagate checked exceptions | Callable's call()“throws Exception” clause so we can easily propagate checked exceptions further |                                                                     |
++----------------------------------------+--------------------------------------------------------------------------------------------------+
+
+
+##########################################################################################################################
+Thread must be implemented by Implementing Runnable Interface.
+
+As Java does not support Multiple Inheritance (1 class cannot be inherited from 2 super class).For eg: class A extends B,Thread — This cannot be achieved in java but can be done in C++.
+
+But Multiple Inheritance can be achieved in java by using Interface. For eg: class A extends B Implement Runnable.
+
+So by using Runnable Interface you are saving one class for Extends.
+#############################################################################################################################################
+class Multi extends Thread{  
+public void run(){  
+System.out.println("thread is running...");  
+}  
+public static void main(String args[]){  
+Multi t1=new Multi();  
+t1.start();  
+ }  
+}  
+
+class Multi3 implements Runnable{  
+public void run(){  
+System.out.println("thread is running...");  
+}  
+  
+public static void main(String args[]){  
+Multi3 m1=new Multi3();  
+Thread t1 =new Thread(m1);  
+t1.start();  
+ }  
+}  
+
+private static void simpleConceptWithRunnable() {
+ Runnable runnable = new Runnable() { // boilerplate code which needs to be written everytime
+  @Override
+  public void run() {
+   System.out.println("Inside annonymos inner class");
+  }
+ };
+ 
+ Runnable runnable2 = () -> { // Lambda expression
+         System.out.println("Inside lambda expression");
+    };
+ 
+ Thread thread = new Thread(runnable);
+ thread.start();
+ 
+ thread = new Thread(runnable2);
+ thread.start();
+}
+
+Thread class provides the join() method which allows one thread to wait until another thread completes its execution
+
+A yield() method is a static method of Thread class and it can stop the currently executing thread and will give a chance to other
+ waiting threads of the same priority.
+
+######################################################################################################################################
+
+Java ArrayList class can contain duplicate elements.
+Java ArrayList class maintains insertion order.
+Java ArrayList class is non synchronized.
+Java ArrayList allows random access because array works at the index basis.
+In ArrayList, manipulation is little bit slower than the LinkedList in Java because a lot of shifting needs to occur if any element is removed from the array list.
+1) ArrayList internally uses a dynamic array to store the elements.	
+2) Manipulation with ArrayList is slow because it internally uses an array. If any element is removed from the array, all the bits are shifted in memory.	
+3) An ArrayList class can act as a list only because it implements List only.	 
+4) ArrayList is better for storing and accessing data.	
+
+########################################################################################################################################
+LinkedList internally uses a doubly linked list to store the elements.
+Manipulation with LinkedList is faster than ArrayList because it uses a doubly linked list, so no bit shifting is required in memory.
+LinkedList class can act as a list and queue both because it implements List and Deque interfaces.
+LinkedList is better for manipulating data.
+#########################################################################################################################################
+Stream API is used to process collections of objects. A stream is a sequence of objects that supports
+ various methods which can be pipelined to produce the desired result.
+#########################################################################################################################################
+Functional Inteface:
+An Interface that contains exactly one abstract method is known as functional interface. 
+It can have any number of default, static methods but can contain only one abstract method. It can also declare methods of object class.
+The features of Java stream are –
+
+A stream is not a data structure instead it takes input from the Collections, Arrays or I/O channels.
+Streams don’t change the original data structure, they only provide the result as per the pipelined methods.
+Each intermediate operation is lazily executed and returns a stream as a result, 
+hence various intermediate operations can be pipelined. Terminal operations mark the end of the stream and return the result.
+###########################################################################################################################################
+Method Refernce :
+=================
+Java provides a new feature called method reference in Java 8. Method reference is used to refer method of functional interface. 
+It is compact and easy form of lambda expression. Each time when you are using lambda expression to just referring a method, 
+you can replace your lambda expression with method reference
+
+FlatMap :
+=========
+
+flatMap will transform the stream of stream into simple stream,using the flatMap to convert the Array of Stream into the String stream.
+Set<String> courses = students.stream()
+         .map(Student::getCourses)
+         .flatMap(Arrays::stream)
+         .collect(Collectors.toSet());
+ List<String> flatMap = students.stream().flatMap(c->c.getCourse().stream()).map(m->m.getAICourse()).collect(Collectors.toList());
+###########################################################################################################################################
+ What is lambda expression?
+Lambda expression is anonymous function which have set of parameters and a lambda (->) and a function body .You can call it function without name.
+Lambda expressions can only be applied to abstract method of functional interface.
+###########################################################################################################################################
+Optional class encapsulates optional value which is either present or not.
+It is a wrapper around object and can be use to avoid NullPointerExceptions.
+###########################################################################################################################################
+ What is consumer function interface?
+Answer:
+Consumer is single argument functional interface which does not return any value.
+When we are using foreach in above example, we are actually passing Consumer functional interface to it.
+*forEach method accepts consumer interface implementation.
+############################################################################################################################################
+What is predicate function interface?
+Answer:
+Predicate is single argument function which returns true or false. It has test method which returns boolean.
+When we are using filter in above example, we are actually passing Predicate functional interface to it.
+#############################################################################################################################################
+ What is supplier function interface?
+Answer:
+Supplier is function interface which does not take any parameter but returns the value using get method.
+#############################################################################################################################################
+What is the need of static method in Interface ?
+Java 8 has added static methods in interface to provide utility methods on interface level without creating the object of the interface.
+Some of the static methods of the java 8 are as below :
+Stream.of()
+Stream.iterate()
+Stream.empty()
+
+of() method example :
+private static void staticReference_WithMethodRef() {
+ Stream<Integer> stream = Stream.of(1,2,3,4,5,6,7,8,9);
+ stream.filter(i -> i%2==0 )
+  .forEach(MethodReference::printMe);
+}
+
+#############################################################################################################################################
+
+Mocking in Mockito is the way to test the functionality of the class. The mock objects do the mocking process of real service in isolation. 
+These mock objects return the dummy data corresponding to the dummy input passed to the function.
+The mocking process does not require you to connect to the database or file server to test functionality.
+
+@Mock - It is used to create and inject mocked instances.
+@Spy - It is used to create a real object and spy on the real object.
+@Captor - It is used to create an ArgumentCaptor.
+@InjectMocks - It is used to create an object of a class and insert its dependencies.
+@Before and @After are called for every test case.
+@BeforeClass and @AfterClass are called once
+assertEquals()
+The assertEquals() method compares two objects for equality, using their equals() method.
+assertTrue() + assertFalse()
+The assertTrue() and assertFalse() methods tests a single variable to see if its value is either true or false. 
+
+how to handle void method 
+
+doNothing/when
+
+doAnswer/when
+
+doThrow/when
+
+############################################################################################################################################
+PowerMock is a Java framework for unit testing purposes. This framework extends from other mock libraries with more powerful capabilities. 
+It uses custom classloader and bytecode manipulation for mocking the static methods, constructors,
+final classes, private methods, and more. It normally lets you test the code that is regarded as untestable.
+############################################################################################################################################
+REST stand for REpresentational State Transfer
+REST is an architectural style that describes best practices to expose web services over HTTP with Emphasizes scalability. 
+Web services written by apply REST Architectural concept are called RESTful web services which focus on System resources and
+ how state of Resource should be transferred over http protocol to a different clients written in different languages. 
+In RESTful web services http methods like GET, PUT, POST and DELETE can can be used to perform CRUD operations.
+
+
+GET: It requests a resource at the request URL. It should not contain a request body as it will be discarded. Maybe it can be cached locally or on the server.
+POST: It submits information to the service for processing; it should typically return the modified or new resource
+PUT: At the request URL it update the resource
+
+PATCH: At the request URL it partially updates the resource
+DELETE: At the request URL it removes the resource
+OPTIONS: It indicates which techniques are supported
+HEAD: About the request URL it returns meta information
+
+
+@RequestParam and @Queryparam is same where @QueryParam is a JAX-RS framework annotation and @RequestParam is from Spring.
+These are the Query parameters which are appended after the ? to the url.
+http://localhost:8080/students/101?param1=10& param2=20
+
+In the above URL request, the values for param1 and param2 can be accessed as below:
+
+public String getStudentDetails(
+ @RequestParam(value="param1", required=true) String param1,
+        @RequestParam(value="param2", required=false) String param2){
+...
+}
+
+@PathVariable
+These variables are the part of the url which are appended by the /.
+http://localhost:8080/students/101
+
+@RequestMapping("/students/{id}")
+public String getStudentDetails(@PathVariable(value="id") String id){
+...
+}
+
+A HttpMessageConverters responsibility is to convert the request body to a specific class and back to the response body again, 
+depending on a predefined mime type. 
+Every time an issued request is hitting a @RequestBody or @ResponseBody annotation spring loops
+through all registered HttpMessageConverters seeking for the first that fits the given mime type and 
+
+class and then uses it for the actual conversion.
+
+resource naming should follow some convention like nouns aare allowed 
+verbs are not allowed.
+
+###########################################################################################################################################
+Different types of Spring Rest Versioning ?
+
+1. URI Path / Path Param – you include the version number in the URL path of the endpoint, for example /v1/students
+2. Query Parameters – you pass the version number as a query parameter with specified name, for example / students?version=1
+3. Custom HTTP Headers – you define a new header that contains the version number in the request
+4. Content Negotiation – the version number is included to the “Accept” header together with accepted content type.
+###########################################################################################################################################
+ How to implement the asynchronous Rest endpoint?
+We can send the immediate response to the client and defer the execution later on the server. In this approach we speed up the server and client interaction and executes the remaining processing in an asynchronous way where a new thread is created to handle the execution.
+With Asynchronous code we defer the execution part in another thread and close the incoming HTTP rest connection by responding back.
+We can implement the asynchronous implementation with @Async annotation. 
+
+@Async and @EnableAsync in Spring Boot
+###########################################################################################################################################
+ In how many ways you can return the HTTP status codes in Rest service?
+HttpServletResponse
+ @ResponseStatus
+@ResponseEntity
+
+http codes
+1xx Informational
+2xx Success
+3xx Redirection
+4xx Client Error
+5xx Server Error
+############################################################################################################################################
+Dependency Injection is a fundamental aspect of the Spring framework, through which the Spring container “injects” objects into other objects or “dependencies”.
+Simply put, this allows for loose coupling of components and moves the responsibility of managing components onto the container
+
+
+Explain the difference between constructor and setter injection?
+In constructor injection, partial injection is not allowed whereas it is allowed in setter injection.
+The constructor injection doesn’t override the setter property whereas the same is not true for setter injection.
+Constructor injection creates a new instance if any modification is done. Creation of new instance is not possible in setter injection.
+In case the bean has many properties, then constructor injection is preferred. If it has few properties, then setter injection is preferred.
+
+
+Singleton: This provides scope for the bean definition to single instance per Spring IoC container.
+Prototype: This provides scope for a single bean definition to have any number of object instances.
+Request: This provides scope for a bean definition to an HTTP-request. 
+Session: This provides scope for a bean definition to an HTTP-session. 
+Global-session: This provides scope for a bean definition to an Global HTTP-session. 
+
+##############################################################################################################################################
+
+They are the objects that form the backbone of the user’s application.
+Beans are managed by the Spring IoC container.
+They are instantiated, configured, wired and managed by a Spring IoC container
+Beans are created with the configuration metadata that the users supply to the container.
+
+
+@Autowired and @Inject injects the dependancy based on below priority
+Matches by Type
+Restricts by Qualifiers
+Matches by Name
+
+@Resource  injects the dependancy based on below priority
+Matches by Name
+Matches by Type
+Restricts by Qualifiers (ignoredif match is found by name)
+
+Resource does not works on setter method / in constructor.
+Spring recommends to use Autowire as it supports in constructor.
+
+
+ What is the use of @Configuration?
+If we want to use the mail sender class which is a part of some third party JAR, we’ll not be able to annotate those with @Component, 
+because we’ll not have access to their source code. so @Configuration class is used which defines method which return these objects with the help of
+ @Bean annotation.
+################################################################################################################################################
+What is the use of @Import and @ImportResource? When to use them in Spring Application?
+If the configuration class of the bean is defined in other package then we can import that bean for autowiring with @Import. Here I have create MailConfigCopy which defines the importMockMail object that we are using in the MailConfig class.
+
+@Configuration
+@Import(MailConfigCopy.class)
+public class MailConfig 
+{
+ @Bean
+ public SmtpMailService smtpMailService(MockMailService importMockMail)
+ {
+  System.out.println("inside import annotaion test");
+  return new SmtpMailService();
+ }
+}
+We can use @ImportResource to import the xml configuration.
+
+@ImportResource(classpath:sample.xml)
+##################################################################################################################################################
+Bean life cycle in Spring Bean Factory Container is as follows:
+
+The Spring container instantiates the bean from the bean’s definition in the XML file.
+Spring populates all of the properties using the dependency injection, as specified in the bean definition.
+The factory calls setBeanName() by passing the bean’s ID, if the bean implements the BeanNameAware interface.
+The factory calls setBeanFactory() by passing an instance of itself, if the bean implements the BeanFactoryAware interface.
+preProcessBeforeInitialization() methods are called if there are any BeanPostProcessors associated with the bean.
+If an init-method is specified for the bean, then it will be called.
+Finally, postProcessAfterInitialization() methods will be called if there are any BeanPostProcessors associated with the bean.
+
+#####################################################################################################################################
+ What do you understand by auto wiring and name the different modes of it?
+The Spring container is able to autowire relationships between the collaborating beans. That is, it is possible to let Spring resolve collaborators for your bean automatically by inspecting the contents of the BeanFactory.
+Different modes of bean auto-wiring are:
+
+no: This is default setting which means no autowiring. Explicit bean reference should be used for wiring.
+byName: It injects the object dependency according to name of the bean. It matches and wires its properties with the beans defined by the same names in the XML file.
+byType: It injects the object dependency according to type. It matches and wires a property if its type matches with exactly one of the beans name in XML file.
+constructor: It injects the dependency by calling the constructor of the class. It has a large number of parameters.
+autodetect: First the container tries to wire using autowire by constructor, if it can’t then it tries to autowire by byType.
+#########################################################################################################################################
+@Component: This marks a java class as a bean. It is a generic stereotype for any Spring-managed component. The component-scanning mechanism of spring now can pick it up and pull it into the application context.
+
+@Controller: This marks a class as a Spring Web MVC controller. Beans marked with it are automatically imported into the Dependency Injection container.
+
+@Service: This annotation is a specialization of the component annotation. It doesn’t provide any additional behavior over the @Component annotation. You can use @Service over @Component in service-layer classes as it specifies intent in a better way.
+
+@Repository: This annotation is a specialization of the @Component annotation with similar use and functionality. It provides additional benefits specifically for DAOs. It imports the DAOs into the DI container and makes the unchecked exceptions eligible for translation into Spring DataAccessException.
+
+#########################################################################################################################################
+Ideally, Service layer (Manager) represents your business logic and hence it should be annotated with @Transactional.
+
+Service layer may call different DAOs to perform DB operations. Lets assume a situation where you have 3 DAO operations in a service method.
+If your 1st DAO operation failed, other two may be still passed and you will end up with an inconsistent DB state. Annotating Service layer can save you from such situations.
+
+#########################################################################################################################################
+What is Transaction Management ?
+ A transaction manager is a part of an application that controls the coordination of transactions over one or more resources.
+ The transaction manager is responsible for creating transaction objects and managing their durability and atomicity.
+##########################################################################################################################################
+
+What are the different types of Transaction Propagations?
+A: The different types of Transaction Propagation for Spring Boot are as follows-
+REQUIRED(Default)
+SUPPORTS
+NOT_SUPPORTED
+REQUIRES_NEW
+NEVER
+MANDATORY
+########################################################################################################################################
+Propagation	Behaviour
+REQUIRED	Always executes in a transaction. If there is any existing transaction it uses it. If none exists then only a new one is created
+SUPPORTS	It may or may not run in a transaction. If current transaction exists then it is supported. If none exists then gets executed with out transaction.
+NOT_SUPPORTED	Always executes without a transaction. If there is any existing transaction it gets suspended
+REQUIRES_NEW	Always executes in a new transaction. If there is any existing transaction it gets suspended
+NEVER	Always executes with out any transaction. It throws an exception if there is an existing transaction
+MANDATORY	Always executes in a transaction. If there is any existing transaction it is used. If there is no existing transaction it will throw an exception.
+
+######################################################################################################################################### 
+How to handle Transactions for checked Exceptions ?
+A: We see that the employeeService transaction is not rolled back due to an exception in employeeHealthService.
+In the Database we see that the insert for employee table has not been rolledback-But this should not be the case. 
+To achieve roll back for checked exception 
+we will need to specify it using Rollbackfor Annotation
+Exmaple :
+
+@Transactional(rollbackFor = InvalidInsuranceAmountException.class)
+##########################################################################################################################################
+@SpringBootApplication annotation includes Auto- Configuration, Component Scan, and Spring Boot Configuration.
+##########################################################################################################################################
+Here are some major advantages of using spring-boot:
+
+Helps you to create a stand-alone application, which can be started using java.jar.
+It offers pinpointed‘started' POMs to Maven configuration.
+Allows you to Embed Undertow, Tomcat, or Jetty directly.
+Helps you to configure spring whenever possible automatically.
+###########################################################################################################################################
+ What is RAD model?
+
+RAD or Rapid Application Development process is an adoption of the waterfall model; it targets developing software in a short period. RAD follow the iterative
+
+SDLC RAD model has the following phases:
+
+Business Modeling
+
+
+#########################################################################################################################################
+ What are the essential components of Spring Boot
+
+The important components of Spring Boot are:
+
+Spring Boot Starter
+Spring Boot autoconfiguration
+Spring Boot Actuator
+Spring Boot CLI
+#########################################################################################################################################
+What is spring-boot-starter-parent?
+
+It is a special starter which makes Gradle or Maven dependency-management easy by adding jars to your classpath.
+#########################################################################################################################################
+What is the primary difference between Spring and Spring Boot?
+
+Spring is a web application development framework based on Java. On the other hand Spring Boot is an extension of the spring framework which eliminated 
+the boilerplate configuration required for setup a Spring application.
+##########################################################################################################################################
+Explain @RestController annotation in Spring Boot?
+
+The @RestController annotation helps you to add @ResponseBody and @Controller annotations to the class.
+
+You can also import org.springframework.web.bind.annotation package in your file.
+##########################################################################################################################################
+Define the term Spring Initializer
+
+Spring initializer is a web application which can create an initial project structure for you.
+###########################################################################################################################################
+Explain Spring CLI
+
+Spring CLI is used for writing in Groovy Spring Boot application, which helps you to concise code.
+###########################################################################################################################################
+  What is the main difference between JPA and Hibernate?
+
+The main difference between both of them is that JPA is a specification/Interface, whereas Hibernate is only JPA implementations.
+###########################################################################################################################################
+ What is a shutdown in the actuator?
+
+A shutdown is an endpoint that helps application to be shut down properly. This feature is not enabled by default.
+
+However, you can use it by setting command: management.endpoint.shutdown.enabled=true in your application.properties file.
+###########################################################################################################################################
+ Explain Auto-Configuration in Spring Boot.
+
+Auto-configuration is used to configure Spring application automatically based on dependencies of classpath parameter. It makes development faster and easier.
+###########################################################################################################################################
+ What is the meaning of Aspect-Oriented Programming (AOP)?
+
+Aspect-Oriented Programming supplements Object-Oriented Programming that aims to increase modularity. AOP breaks program logic into various parts, which are called concerns.
+###########################################################################################################################################
+ How to enable logging in Spring Boot?
+
+In order to enable debug logging, you can specify --debug while starting the application from the command prompt
+###########################################################################################################################################
+ What is Normalization and what are the advantages of it?
+Normalization in SQL is the process of organizing data to avoid duplication and redundancy. Some of the advantages are:
+
+Better Database organization
+More Tables with smaller rows
+Efficient data access
+Greater Flexibility for Queries
+Quickly find the information
+Easier to implement Security
+Allows easy modification
+Reduction of redundant and duplicate data
+More Compact Database
+Ensure Consistent data after modification
