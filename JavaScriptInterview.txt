@@ -167,7 +167,7 @@ class Car {
     }
 }
 
-var car1 = new Car("BMW", 100);
+var car1 = new Car("BMW", 100);;
 car1.getInfo();
 var car2 = new Car("Audi", 150);
 car2.getInfo();
